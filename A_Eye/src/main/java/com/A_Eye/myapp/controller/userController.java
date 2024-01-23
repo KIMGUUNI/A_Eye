@@ -3,6 +3,7 @@ package com.A_Eye.myapp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,13 +17,21 @@ import com.A_Eye.myapp.model.userVO;
 public class userController {
    @Autowired
    private userMapper mapper;
-
+   
+   @Transactional
    @PostMapping("/api/register")
    public ResponseEntity<String> registerUser(@RequestBody userVO vo) {
       System.out.println(vo);
       System.out.println("리액트 통신");
-      
-     
+      vo.setName(vo.getName());
+      System.out.println(vo.getName());
+      System.out.println(vo.getPassword());
+      System.out.println(vo.getEmail());
+      System.out.println(vo.getSsn());
+      vo.setPassword(vo.getPassword());
+      vo.setEmail(vo.getEmail());
+      vo.setSsn(vo.getSsn());
+      mapper.register(vo);
       String redirectUrl = "http://localhost:3000/";
       return ResponseEntity.status(HttpStatus.OK).header("Location", redirectUrl)
             .body("{\"message\": \"User registration successful!\"}");
