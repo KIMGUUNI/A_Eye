@@ -9,4 +9,6 @@ public interface userMapper {
 
 	void register(userVO vo);
 
+	userVO login(userVO vo);
+
 }

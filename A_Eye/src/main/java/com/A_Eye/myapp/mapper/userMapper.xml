@@ -5,4 +5,7 @@
 <insert id="register" parameterType="com.A_Eye.myapp.model.userVO">
 	INSERT INTO JOIN_TBL VALUES(#{name},#{password},#{email},#{ssn})
 	</insert>
+	<select id="login" parameterType="com.A_Eye.myapp.model.userVO" resultType="com.A_Eye.myapp.model.userVO">
+		SELECT * FROM JOIN_TBL WHERE EMAIL = #{email} AND PASSWORD = #{password}
+	</select>
 </mapper>
