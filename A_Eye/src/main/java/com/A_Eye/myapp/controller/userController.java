@@ -20,8 +20,11 @@ public class userController {
    @PostMapping("/api/register")
    public ResponseEntity<String> registerUser(@RequestBody userVO vo) {
       System.out.println(vo);
-      System.out.println("리액트 통신");
-
+     
+      
+      System.out.println(vo.getName());
+      
+      
       String redirectUrl = "http://localhost:3000/";
       return ResponseEntity.status(HttpStatus.OK).header("Location", redirectUrl)
             .body("{\"message\": \"User registration successful!\"}");
