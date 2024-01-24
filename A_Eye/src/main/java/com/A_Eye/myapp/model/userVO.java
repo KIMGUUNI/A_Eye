@@ -10,20 +10,20 @@ import lombok.NoArgsConstructor;
 public class userVO {
    
 	 // 사용자 번호 
-    private int userIdx;
+    private int user_idx;
     
     // 사용자 이름 
-    private String userName;
+    private String user_name;
 
     // 사용자 이메일 
-    private String userEmail;
+    private String user_email;
 
     // 사용자 비밀번호 
-    private String userPw;
+    private String user_pw;
 
     // 사용자 가입날자 
-    private String userSignDate;
+    private String user_sign_date;
 
     // 사용자 position 
-    private String userPosition;
+    private String user_position;
 }
