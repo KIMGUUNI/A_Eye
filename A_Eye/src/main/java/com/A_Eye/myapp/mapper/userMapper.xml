@@ -3,9 +3,10 @@
 
 <mapper namespace="com.A_Eye.myapp.mapper.userMapper">
 <insert id="register" parameterType="com.A_Eye.myapp.model.userVO">
-	INSERT INTO JOIN_TBL VALUES(#{name},#{password},#{email},#{ssn})
+	INSERT INTO JOIN_TBL VALUES(#{userEmail},#{userPw},#{userName})
 	</insert>
 	<select id="login" parameterType="com.A_Eye.myapp.model.userVO" resultType="com.A_Eye.myapp.model.userVO">
-		SELECT * FROM JOIN_TBL WHERE EMAIL = #{email} AND PASSWORD = #{password}
+		SELECT * FROM JOIN_TBL WHERE USER_EMAIL = #{userEmail} AND USER_PW = #{userPw}
 	</select>
 </mapper>
+

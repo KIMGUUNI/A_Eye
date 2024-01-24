@@ -23,14 +23,10 @@ public class userController {
    public ResponseEntity<String> registerUser(@RequestBody userVO vo) {
       System.out.println(vo);
       System.out.println("리액트 통신");
-      vo.setName(vo.getName());
-      System.out.println(vo.getName());
-      System.out.println(vo.getPassword());
-      System.out.println(vo.getEmail());
-      System.out.println(vo.getSsn());
-      vo.setPassword(vo.getPassword());
-      vo.setEmail(vo.getEmail());
-      vo.setSsn(vo.getSsn());
+      System.out.println(vo.getUserEmail());
+      System.out.println(vo.getUserPw());
+      System.out.println(vo.getUserName());
+      System.out.println(vo.getUserSignDate());
       mapper.register(vo);
       String redirectUrl = "http://localhost:3000/authentication/sign-in/";
       return ResponseEntity.status(HttpStatus.OK).header("Location", redirectUrl)
@@ -53,8 +49,8 @@ public class userController {
 	   System.out.println(vo);
 	   System.out.println("리액트 통신");
 	   System.out.println("리액트 통신2");
-	   vo.setEmail(vo.getEmail());
-	   vo.setPassword(vo.getPassword());
+	   vo.setUserEmail(vo.getUserEmail());
+	   vo.setUserPw(vo.getUserPw());
 	  userVO loginVO = mapper.login(vo);
 	  System.out.println(loginVO);
 	   if(loginVO!=null) {
