@@ -10,7 +10,10 @@ import lombok.NoArgsConstructor;
 public class userVO {
    
 	 // 사용자 번호 
-    private Long userIdx;
+    private int userIdx;
+    
+    // 사용자 이름 
+    private String userName;
 
     // 사용자 이메일 
     private String userEmail;
