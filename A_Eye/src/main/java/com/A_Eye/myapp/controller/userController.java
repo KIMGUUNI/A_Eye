@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.A_Eye.myapp.mapper.userMapper;
+import com.A_Eye.myapp.model.adVO;
 import com.A_Eye.myapp.model.userVO;
 @Transactional
 @RestController
@@ -32,17 +33,6 @@ public class userController {
       return ResponseEntity.status(HttpStatus.OK).header("Location", redirectUrl)
             .body("{\"message\": \"User registration successful!\"}");
    }
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
   
    @PostMapping("/api/sign-in")
    public userVO login(@RequestBody userVO vo) {
@@ -59,6 +49,11 @@ public class userController {
 		   return null;
 	   }
    }
+  @PostMapping("/api/application")
+  public void application(@RequestBody adVO vo) {
+	  mapper.application(vo);
+	  System.out.println(vo);
+  }
    
    
    
