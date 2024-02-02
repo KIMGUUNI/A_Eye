@@ -30,4 +30,6 @@ public class adConroller {
 		return advo;		
 	}
 	
+	
+	
 }

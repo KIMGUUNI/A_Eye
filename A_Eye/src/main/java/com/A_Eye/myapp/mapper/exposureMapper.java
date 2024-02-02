@@ -12,4 +12,8 @@ public interface exposureMapper {
 
 	List<exposureVO> getMonthAd(adVO idx);
 
+	List<exposureVO> getChartAd(adVO advo);
+
+	List<exposureVO> getBarChartAd(adVO advo);
+
 }
