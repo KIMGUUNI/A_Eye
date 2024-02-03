@@ -1,0 +1,32 @@
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.A_Eye.myapp.mapper.boardMapper">
+
+	<insert id="writeBoard"
+		parameterType="com.A_Eye.myapp.model.boardVO">
+		INSERT INTO tbl_inquiry(user_idx,inquiry_content,inquiry_title,inquiry_pw)
+		VALUES(#{user_idx},#{inquiry_title},#{inquiry_content},#{inquiry_pw})
+	</insert>
+
+
+	<select id="boardList"
+		resultType="com.A_Eye.myapp.model.boardVO">
+		SELECT * FROM tbl_inquiry
+	</select>
+
+	<select id="boardGet" resultType="com.A_Eye.myapp.model.boardVO">
+		SELECT * FROM tbl_inquiry WHERE inquiry_indx=#{inquiry_indx}
+	</select>
+
+	<update id="boardAnswer"
+		parameterType="com.A_Eye.myapp.model.boardVO">
+		UPDATE tbl_inquiry
+		SET
+		answer_content = #{answer_content},
+		inquiry_completed = #{inquiry_completed}
+		WHERE inquiry_indx = #{inquiry_indx}
+	</update>
+
+</mapper>

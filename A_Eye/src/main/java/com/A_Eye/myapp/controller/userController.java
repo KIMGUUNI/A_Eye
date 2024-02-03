@@ -22,12 +22,6 @@ public class userController {
   
    @PostMapping("/api/register")
    public ResponseEntity<String> registerUser(@RequestBody userVO vo) {
-      System.out.println(vo);
-      System.out.println("리액트 통신");
-      System.out.println(vo.getUser_email());
-      System.out.println(vo.getUser_pw());
-      System.out.println(vo.getUser_name());
-      System.out.println(vo.getUser_sign_date());
       mapper.register(vo);
       String redirectUrl = "http://localhost:3000/authentication/sign-in/";
       return ResponseEntity.status(HttpStatus.OK).header("Location", redirectUrl)
