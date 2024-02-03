@@ -1,0 +1,14 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.A_Eye.myapp.mapper.adMapper">
+	<select id="getUserAds" parameterType="com.A_Eye.myapp.model.userVO" resultType="com.A_Eye.myapp.model.adVO">
+		SELECT a.*, b.AD_EXPO_NUM
+		FROM TBL_AD a LEFT OUTER JOIN 
+        (SELECT ad_IDX, COUNT(*) AS AD_EXPO_NUM 
+        FROM TBL_EXPOSURE
+        GROUP BY AD_IDX) b on(a.ad_IDX = b.ad_IDX)
+		WHERE USER_IDX = #{user_idx}
+	</select>
+</mapper>
+
