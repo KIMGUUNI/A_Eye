@@ -14,13 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.A_Eye.myapp.mapper.boardMapper;
 import com.A_Eye.myapp.model.boardVO;
 
+//import io.swagger.annotations.Api;
+//import io.swagger.annotations.ApiOperation;
+//import io.swagger.v3.oas.annotations.tags.Tag;
+
 @Transactional
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
+//@Tag(name = "예제 API", description = "Swagger 테스트용 API")
 public class boardController {
 
 	@Autowired
 	private boardMapper mapper;
+	
 
 	@PostMapping("/api/profile")
 	public ResponseEntity<String> registerBoard(@RequestBody boardVO vo) {
