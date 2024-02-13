@@ -3,7 +3,6 @@ package com.A_Eye.myapp.model;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.smhrd.myapp.entity.CloudMember;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
