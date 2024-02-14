@@ -6,7 +6,7 @@
 	INSERT INTO tbl_user(user_name,user_email,user_pw) VALUES(#{user_name},#{user_email},#{user_pw})
 	</insert>
 	<select id="login" parameterType="com.A_Eye.myapp.model.userVO" resultType="com.A_Eye.myapp.model.userVO">
-		SELECT * FROM TBL_USER WHERE USER_EMAIL = #{user_email} AND USER_PW = #{user_pw}
+		SELECT * FROM TBL_USER WHERE USER_EMAIL = #{user_email}
 	</select>
 	<insert id="application" parameterType="com.A_Eye.myapp.model.adVO">
 	INSERT INTO TBL_AD (AD_NAME,USER_IDX,AD_TARGET_AGE,AD_TARGET_GENDER) VALUES(#{ad_name},#{user_idx},#{ad_target_age},#{ad_target_gender, jdbcType=VARCHAR})
