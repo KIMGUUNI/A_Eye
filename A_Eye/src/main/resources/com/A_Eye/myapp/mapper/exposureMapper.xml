@@ -7,57 +7,96 @@
 		resultType="com.A_Eye.myapp.model.exposureVO">
 
 		SELECT *
-		FROM (SELECT expo_region AS expoRegion, region_count
+		FROM (
+		SELECT expo_region AS expoRegion,
+		region_count
 		FROM (
 		SELECT expo_region,
-		ROW_NUMBER() OVER (ORDER BY COUNT(*) DESC) AS row_num,
+		ROW_NUMBER() OVER (ORDER BY
+		COUNT(*) DESC) AS row_num,
 		COUNT(*) AS region_count
 		FROM tbl_exposure
 		WHERE ad_idx = #{ad_idx}
-		GROUP BY expo_region)
-		WHERE row_num = 1) 
-		CROSS JOIN
-		(SELECT * FROM(
+		AND EXPO_DATE >= TRUNC(SYSDATE, 'MM') -
+		INTERVAL '11' MONTH
+		AND EXPO_DATE &lt; TRUNC(SYSDATE, 'MM') + INTERVAL
+		'1'
+		MONTH
+		GROUP BY expo_region
+		)
+		WHERE row_num = 1
+		)
+		CROSS JOIN (
+		SELECT *
+		FROM
+		(
 		SELECT TO_CHAR(EXPO_DATE, 'YYYY-MM') AS month,
+		COUNT(*) AS
+		month_count
+		FROM TBL_EXPOSURE
+		WHERE EXPO_DATE >= TRUNC(SYSDATE, 'MM') -
+		INTERVAL
+		'11' MONTH
+		AND EXPO_DATE &lt; TRUNC(SYSDATE, 'MM') + INTERVAL
+		'1' MONTH
+		AND ad_idx = #{ad_idx}
+		GROUP BY TO_CHAR(EXPO_DATE, 'YYYY-MM')
+		ORDER BY
+		month DESC
+		)
+		WHERE ROWNUM = 1
+		)
+		CROSS JOIN (
+		SELECT * FROM (
+		SELECT
+		TO_CHAR(EXPO_DATE, 'YYYY-MM-DD') AS day,
+		count(*) AS day_count
+		FROM
+		TBL_EXPOSURE
+		WHERE EXPO_DATE >= TRUNC(SYSDATE, 'MM') - INTERVAL '11'
+		MONTH
+		AND EXPO_DATE &lt; TRUNC(SYSDATE, 'MM') + INTERVAL '1' MONTH
+		AND
+		ad_idx = #{ad_idx}
+		GROUP BY TO_CHAR(EXPO_DATE, 'YYYY-MM-DD')
+		ORDER BY
+		day DESC
+		)
+		WHERE ROWNUM = 1
+		)
+	</select>
+	<select id="getChartAd"
+		parameterType="com.A_Eye.myapp.model.adVO"
+		resultType="com.A_Eye.myapp.model.exposureVO">
+		SELECT * FROM (
+		SELECT TO_CHAR(EXPO_DATE, 'YYYY-MM') AS
+		month,
 		COUNT(*) AS month_count
 		FROM TBL_EXPOSURE
-		WHERE TO_CHAR(EXPO_DATE, 'YYYY') = '2024' AND ad_idx = #{ad_idx}
+		WHERE EXPO_DATE &gt;=
+		TRUNC(SYSDATE, 'MM') - INTERVAL '11' MONTH
+		AND EXPO_DATE &lt; TRUNC(SYSDATE, 'MM') + INTERVAL '1' MONTH
+		AND ad_idx = #{ad_idx}
 		GROUP BY TO_CHAR(EXPO_DATE, 'YYYY-MM')
-		ORDER BY month DESC)
-		WHERE ROWNUM = 1) 
-		CROSS JOIN
-		(SELECT * FROM(
+		ORDER BY
+		month
+		)
+
+	</select>
+	<select id="getBarChartAd"
+		parameterType="com.A_Eye.myapp.model.adVO"
+		resultType="com.A_Eye.myapp.model.exposureVO">
+		SELECT * FROM (
 		SELECT TO_CHAR(EXPO_DATE, 'YYYY-MM-DD') AS day,
 		count(*) AS day_count
 		FROM TBL_EXPOSURE
 		WHERE TO_CHAR(EXPO_DATE, 'YYYY') = '2024' AND ad_idx = #{ad_idx}
 		GROUP BY TO_CHAR(EXPO_DATE, 'YYYY-MM-DD')
-		ORDER BY day DESC)
-		WHERE ROWNUM = 1)
-	</select>
-	<select id="getChartAd" 
-		parameterType="com.A_Eye.myapp.model.adVO"
-		resultType="com.A_Eye.myapp.model.exposureVO">
-		SELECT * FROM(
-			SELECT TO_CHAR(EXPO_DATE, 'YYYY-MM') AS month,
-			       COUNT(*) AS month_count
-			FROM TBL_EXPOSURE 
-			WHERE TO_CHAR(EXPO_DATE, 'YYYY') = '2024' AND ad_idx = #{ad_idx}
-			GROUP BY TO_CHAR(EXPO_DATE, 'YYYY-MM')
-			ORDER BY month)
-	</select>
-	<select id="getBarChartAd" 
-		parameterType="com.A_Eye.myapp.model.adVO"
-		resultType="com.A_Eye.myapp.model.exposureVO">
-		SELECT * FROM(
-		SELECT TO_CHAR(EXPO_DATE, 'YYYY-MM-DD') AS day,
-		count(*) AS day_count
-		FROM TBL_EXPOSURE
-		WHERE TO_CHAR(EXPO_DATE, 'YYYY') = '2024' AND ad_idx = #{ad_idx} 
-		GROUP BY TO_CHAR(EXPO_DATE, 'YYYY-MM-DD')
-		ORDER BY day DESC)
+		ORDER BY day DESC
+		)
 		WHERE ROWNUM &lt; 8
 		ORDER BY day
+
 	</select>
 </mapper>
 
