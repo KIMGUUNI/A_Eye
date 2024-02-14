@@ -21,7 +21,8 @@ public class WebSecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeRequests(authorize -> authorize
                         .antMatchers("/images/**", "/api/boardList", "/api/sign-in", "/api/register", "/api/prove", "/swagger-ui.html", "/api/profile", "/api/boardList","/api/boardGet"
-                        		, "/api/boardAnswer", "/api/application","/api/getMonthAds","/api/getChartAd","/api/getBarChartAd","/api/getUserAds").permitAll()
+                        		, "/api/boardAnswer", "/api/application","/api/getMonthAds","/api/getChartAd","/api/getBarChartAd","/api/getUserAds",
+                        		"/api/Refuse","/api/Approval","/api/GetVideoUrl","/api/SelectVd").permitAll()
                         .antMatchers("/billing/**").hasRole("1")
                         .anyRequest().authenticated())
                 .formLogin(login -> login.disable());
