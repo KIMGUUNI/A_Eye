@@ -16,4 +16,7 @@ public class adVO {
 	private char ad_approval;
 	private int ad_expo_num;
 	private String file_s3_path;
+	private String ad_start_date;
+	private String ad_end_date;
+	private int ad_play_number;
 }
