@@ -11,5 +11,7 @@ import com.A_Eye.myapp.model.userVO;
 public interface adMapper {
 
 	List<adVO> getUserAds(userVO vo);
+
+	List<adVO> Advertising();
 		
 }

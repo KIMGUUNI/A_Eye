@@ -29,7 +29,13 @@ public class adConroller {
 		System.out.println(advo);
 		return advo;		
 	}
-	
+	@PostMapping("/api/Advertising")
+	public List<adVO> Advertising(){
+		System.out.println("Advertising 통신 완료");
+		List<adVO> result= mapper.Advertising();
+		
+		return result;
+	}
 	
 	
 }

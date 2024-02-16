@@ -10,5 +10,8 @@
         GROUP BY AD_IDX) b on(a.ad_IDX = b.ad_IDX)
 		WHERE USER_IDX = #{user_idx}
 	</select>
+	<select id="Advertising" resultType="com.A_Eye.myapp.model.adVO">
+	SELECT * FROM TBL_AD WHERE AD_APPROVAL = 'Y'
+	</select>
 </mapper>
 
