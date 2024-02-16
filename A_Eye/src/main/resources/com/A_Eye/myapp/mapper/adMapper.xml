@@ -9,14 +9,24 @@
 		FROM TBL_AD a LEFT OUTER JOIN
 		(SELECT ad_IDX, COUNT(*) AS AD_EXPO_NUM
 		FROM TBL_EXPOSURE
-		GROUP BY AD_IDX) b on(a.ad_IDX = b.ad_IDX)
+		GROUP BY
+		AD_IDX) b on(a.ad_IDX = b.ad_IDX)
 		WHERE USER_IDX = #{user_idx}
 	</select>
 	<select id="Advertising" resultType="com.A_Eye.myapp.model.adVO">
 		SELECT *
 		FROM TBL_AD
-		WHERE AD_APPROVAL = 'Y'
+		WHERE
+		AD_APPROVAL = 'Y'
 		ORDER BY ad_play_number DESC
 	</select>
+	<update id="updatePlayCount"
+		parameterType="com.A_Eye.myapp.model.adVO">
+
+		UPDATE TBL_AD
+		SET ad_play_number = #{ad_play_number}
+		WHERE ad_name = #{ad_name}
+
+	</update>
 </mapper>
 

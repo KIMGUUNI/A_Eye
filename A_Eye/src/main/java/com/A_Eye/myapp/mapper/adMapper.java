@@ -13,5 +13,7 @@ public interface adMapper {
 	List<adVO> getUserAds(userVO vo);
 
 	List<adVO> Advertising();
+
+	void updatePlayCount(adVO vo);
 		
 }
