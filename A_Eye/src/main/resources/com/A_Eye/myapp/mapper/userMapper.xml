@@ -9,7 +9,7 @@
 		SELECT * FROM TBL_USER WHERE USER_EMAIL = #{user_email}
 	</select>
 	<insert id="application" parameterType="com.A_Eye.myapp.model.adVO">
-	INSERT INTO TBL_AD (AD_NAME,USER_IDX,AD_TARGET_AGE,AD_TARGET_GENDER) VALUES(#{ad_name},#{user_idx},#{ad_target_age},#{ad_target_gender, jdbcType=VARCHAR})
+	INSERT INTO TBL_AD (AD_NAME,USER_IDX,AD_TARGET_AGE,AD_TARGET_GENDER,AD_START_DATE,AD_END_DATE) VALUES(#{ad_name},#{user_idx},#{ad_target_age},#{ad_target_gender, jdbcType=VARCHAR},#{ad_start_date},#{ad_end_date})
 	</insert>
 </mapper>
 
