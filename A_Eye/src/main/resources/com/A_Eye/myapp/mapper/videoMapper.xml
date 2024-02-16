@@ -1,0 +1,19 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.A_Eye.myapp.mapper.videoMapper">
+	<select id="SelectVd" resultType="com.A_Eye.myapp.model.adVO">
+		SELECT * FROM TBL_AD WHERE
+		AD_APPROVAL= 'N'
+	</select>
+	<update id="Approval" parameterType="com.A_Eye.myapp.model.adVO">
+		UPDATE TBL_AD
+		SET
+		AD_APPROVAL = 'Y'
+		WHERE AD_IDX = #{ad_idx}
+	</update>
+	<delete id="Refuse" parameterType="com.A_Eye.myapp.model.adVO">
+		DELETE FROM TBL_AD WHERE AD_IDX = #{ad_idx}
+	</delete>
+</mapper>
+

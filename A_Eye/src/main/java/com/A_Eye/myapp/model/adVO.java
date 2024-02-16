@@ -15,4 +15,5 @@ public class adVO {
 	private String ad_target_gender;
 	private char ad_approval;
 	private int ad_expo_num;
+	private String file_s3_path;
 }

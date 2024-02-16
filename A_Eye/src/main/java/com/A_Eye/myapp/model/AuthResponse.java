@@ -11,13 +11,15 @@ public class AuthResponse {
     private int user_idx;
     private String user_name;
     private String user_email;
+    private String user_position;
 
-    public AuthResponse(String jwt, String rJwt, int i, String name, String email) {
+    public AuthResponse(String jwt, String rJwt, int user_idx, String user_name, String user_email, String user_position) {
         this.jwt = jwt;
         this.rJwt = rJwt;
-        this.user_idx = i;
-        this.user_name=name;
-        this.user_email=email;
+        this.user_idx = user_idx;
+        this.user_name = user_name;
+        this.user_email = user_email;
+        this.user_position = user_position;
     }
 
 }

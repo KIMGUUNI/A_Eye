@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.A_Eye.myapp.model.AuthResponse;
@@ -123,7 +124,7 @@ public class userController {
 			// 검증되었다면 access 토큰 재발급
 			// refreshJwt가 없다면 재로그인
 			AuthResponse response = new AuthResponse(accessJwt, refreshJwt,  loginVO.getUser_idx(), loginVO.getUser_name(),
-					loginVO.getUser_email());
+					loginVO.getUser_email(), loginVO.getUser_position());
 			return ResponseEntity.ok(response);
 		} else {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
@@ -142,9 +143,12 @@ public class userController {
 		return jwtUtil.userINfo(header);
 	}
 	
+	
 	@GetMapping("/api/reProve")
-	public ResponseEntity<?> refreshToken(@RequestHeader(name = "Authorization") String header) {
-		return jwtUtil.refreshToken(header);
+	public ResponseEntity<?> refreshToken(@RequestHeader(name = "Authorization") String header,
+	                                       @RequestParam(name = "user_name") String user_name,
+	                                       @RequestParam(name = "user_position") String userPosition) {
+	    return jwtUtil.refreshToken(header, user_name, userPosition);
 	}
 	
 }

@@ -57,11 +57,17 @@ public class JwtUtil {
             .compact();
    }
    
+   
    // 토큰 검증
    public ResponseEntity<?> userINfo(@RequestHeader(name = "Authorization") String header) {
+	   System.out.println(header);
       try {
          String jwt = header.replace(JwtProvider.TOKEN_PREFIX, "");
          System.out.println("검증 토큰 완료");
+         
+         // access token 검증 (db)
+         
+         
 
          // 토큰을 해석하여 Claims(페이로드에 담긴 정보)를 가져옴
          Jws<Claims> parsedToken = Jwts.parser().verifyWith(Keys.hmacShaKeyFor(sigingKey)).build()
@@ -100,14 +106,14 @@ public class JwtUtil {
    
    
    
-   public ResponseEntity<?> refreshToken(@RequestHeader("refreshToken") String refreshToken) {
+   public ResponseEntity<?> refreshToken(@RequestHeader("refreshToken") String refreshToken, String user_name, String userPosition) {
        try {
           System.out.println("===============================================토큰 재발급===============================================");
           refreshToken = refreshToken.replace(JwtProvider.TOKEN_PREFIX, "");
-          refreshTkVO a = reMapper.proveRefresh(refreshToken);
-      
+          refreshTkVO refresh = reMapper.proveRefresh(refreshToken);
+          int user_idx = refresh.getUser_idx();
              DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS");
-             LocalDateTime expiration = LocalDateTime.parse(a.getExpiration(), formatter);
+             LocalDateTime expiration = LocalDateTime.parse(refresh.getExpiration(), formatter);
              LocalDateTime now = LocalDateTime.now();
              
              if (expiration.isBefore(now)) {
@@ -117,8 +123,14 @@ public class JwtUtil {
                  
               } else {
                   System.out.println("만료 시간이 현재 시간 이후입니다.");
-                  
-                  String newAccessToken = generateNewAccessToken(username, roles);
+                  System.out.println("===============check1===========");
+                  String newAccessToken = generateNewAccessToken(user_name, userPosition);
+                  String newRefreshToken = createRefreshToken();
+                  System.out.println("===============check2===========");
+                  System.out.println(newRefreshToken);
+                  System.out.println(user_idx);
+                  reMapper.reCreateRefreshToken(newRefreshToken, user_idx);
+                  System.out.println("===============check3===========");
                   return new ResponseEntity<String>(newAccessToken, HttpStatus.OK);
               }
          

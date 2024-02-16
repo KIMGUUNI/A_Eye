@@ -11,4 +11,6 @@ public interface refreshMapper {
     refreshTkVO proveRefresh(String refreshToken);
     
     int delRefreshJwt(String refreshToken);
+    
+    int reCreateRefreshToken(String newRefreshToken, int user_idx);
 }
