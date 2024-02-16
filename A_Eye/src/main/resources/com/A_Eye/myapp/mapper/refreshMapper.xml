@@ -1,0 +1,28 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="com.A_Eye.myapp.mapper.refreshMapper">
+	<insert id="refreshJwt"
+		parameterType="com.A_Eye.myapp.model.refreshTkVO">
+		INSERT INTO TBL_JWT (USER_IDX,JWT_REFRESH,EXPIRATION)
+		VALUES(#{user_idx},#{jwt_refresh}, SYSTIMESTAMP+INTERVAL '5' MINUTE)
+	</insert>
+	<select id="proveRefresh"
+		parameterType="com.A_Eye.myapp.model.refreshTkVO"
+		resultType="com.A_Eye.myapp.model.refreshTkVO">
+		SELECT * FROM TBL_JWT WHERE jwt_refresh = #{refreshToken}
+	</select>
+	<delete id="delRefreshJwt"
+		parameterType="com.A_Eye.myapp.model.refreshTkVO">
+		DELETE FROM TBL_JWT WHERE jwt_refresh = #{refreshToken}
+	</delete>
+	<update id="reCreateRefreshToken">
+		UPDATE TBL_JWT
+		SET JWT_REFRESH = #{newRefreshToken}, EXPIRATION = SYSTIMESTAMP+INTERVAL
+		'5' MINUTE
+		WHERE USER_IDX = #{user_idx}
+	</update>
+	
+</mapper>
