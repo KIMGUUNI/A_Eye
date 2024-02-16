@@ -21,7 +21,7 @@ public class WebSecurityConfig {
 								"/swagger-ui.html", "/api/profile", "/api/boardList", "/api/boardGet",
 								"/api/boardAnswer", "/api/application", "/api/getMonthAds", "/api/getChartAd",
 								"/api/getBarChartAd", "/api/getUserAds", "/api/reProve", "/api/Refuse", "/api/Approval",
-								"/api/GetVideoUrl", "/api/SelectVd")
+								"/api/GetVideoUrl", "/api/SelectVd","/api/Advertising")
 						.permitAll().antMatchers("/billing/**").hasRole("1").anyRequest().authenticated())
 				.formLogin(login -> login.disable()); 
 
