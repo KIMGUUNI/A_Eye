@@ -1,0 +1,9 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.A_Eye.myapp.mapper.payMapper">
+    <update id="payResult" parameterType="com.A_Eye.myapp.model.payVO">
+        INSERT INTO TBL_PAY(ad_idx, pay_cost, pay_date, pay_method) 
+        VALUES(#{ad_idx}, #{pay_cost}, SYSDATE, #{pay_method})
+    </update>
+</mapper>

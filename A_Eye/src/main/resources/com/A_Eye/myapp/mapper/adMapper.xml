@@ -26,7 +26,23 @@
 		UPDATE TBL_AD
 		SET ad_play_number = #{ad_play_number}
 		WHERE ad_name = #{ad_name}
-
 	</update>
+
+	<select id="adBoard" resultType="com.A_Eye.myapp.model.adVO">
+		SELECT a.*, p.PAY_DATE
+		FROM TBL_AD a
+		LEFT JOIN TBL_PAY p ON a.AD_IDX = p.AD_IDX
+		WHERE a.USER_IDX=#{user_idx}
+	</select>
+	
+
+	<!-- <select id="adBoard" resultType="com.A_Eye.myapp.model.adVO">
+		SELECT *
+		FROM TBL_AD
+		WHERE
+		USER_IDX=#{user_idx}
+	</select> -->
+
+
 </mapper>
 

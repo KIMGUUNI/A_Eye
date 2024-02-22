@@ -39,6 +39,16 @@ public class adConroller {
 		
 		return result;
 	}
+	
+	@PostMapping("/api/adList")
+	public List<adVO> adBoard(@RequestBody adVO vo) {
+		System.out.println("드옴");
+		System.out.println(vo);
+		List<adVO> result = mapper.adBoard(vo);
+		System.out.println(vo);
+		return result;
+		
+	}
 	 
 	 @PostMapping("/api/s3Url")
 	    public ResponseEntity<String> receiveS3Url(@RequestBody String url) {

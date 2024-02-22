@@ -15,5 +15,8 @@ public interface adMapper {
 	List<adVO> Advertising();
 
 	void updatePlayCount(adVO vo);
+	
+	List<adVO> adBoard(adVO vo);
+	
 		
 }

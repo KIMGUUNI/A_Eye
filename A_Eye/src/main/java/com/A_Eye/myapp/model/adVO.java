@@ -19,4 +19,5 @@ public class adVO {
 	private String ad_start_date;
 	private String ad_end_date;
 	private int ad_play_number;
+	private String pay_date;
 }
