@@ -42,7 +42,7 @@ public class JwtUtil {
       return Jwts.builder().signWith(Keys.hmacShaKeyFor(sigingKey), Jwts.SIG.HS512) // 시그니처 사용할 비밀키, 알고리즘 설정
             .header() // 헤더 설정
             .add("typ", JwtProvider.TOKEN_TYPE) // typ: JWT
-            .and().expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 1)) // 토큰 만료 시간 설정 ()
+            .and().expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30)) // 토큰 만료 시간 설정 ()
             .claim("uid", userEmail) // PAYLOAD -uid : user
             .claim("rol", role) // PAYLOAD - rol : [ROLE_USER, ROLE_ADMIN] (권한 정보)
             .compact();
@@ -53,7 +53,7 @@ public class JwtUtil {
       return Jwts.builder().signWith(Keys.hmacShaKeyFor(sigingKey), Jwts.SIG.HS512) // 시그니처 사용할 비밀키, 알고리즘 설정
             .header() // 헤더 설정
             .add("typ", JwtProvider.TOKEN_TYPE) // typ: JWT
-            .and().expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 5)) // 토큰 만료 시간 설정 ()
+            .and().expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7)) // 토큰 만료 시간 설정 ()
             .compact();
    }
    
