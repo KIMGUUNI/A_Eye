@@ -28,5 +28,7 @@
 		inquiry_completed = #{inquiry_completed}
 		WHERE inquiry_indx = #{inquiry_indx}
 	</update>
-
+	<delete id="deletePost" parameterType="com.A_Eye.myapp.model.boardVO">
+		DELETE FROM TBL_INQUIRY WHERE INQUIRY_INDX= #{inquiry_indx}
+	</delete>
 </mapper>

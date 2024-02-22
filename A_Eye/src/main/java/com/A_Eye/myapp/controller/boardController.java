@@ -43,12 +43,11 @@ public class boardController {
 	}
 	
 	@PostMapping("/api/boardGet")
-	public List <boardVO> boardGet(@RequestBody String inquiry_indx){
-		System.out.println(inquiry_indx);
-		inquiry_indx = inquiry_indx.substring(0,2);
-		System.out.println(inquiry_indx);
-		List <boardVO> result = mapper.boardGet(inquiry_indx);
-		return result;
+	public boardVO boardGet(@RequestBody boardVO vo){
+		System.out.println(vo.getInquiry_indx());
+		int result =  vo.getInquiry_indx();
+		boardVO data= mapper.boardGet(result);
+		return data;
 	}
 	
 	@PostMapping("/api/boardAnswer")
@@ -58,6 +57,12 @@ public class boardController {
 		int result = mapper.boardAnswer(vo);
 		System.out.println(result);
 		return result;
+	}
+	@PostMapping("/api/deletePost")
+	public int deletePost(@RequestBody boardVO vo) {
+		System.out.println("삭제할 데이터"+vo);
+		mapper.deletePost(vo);
+		return 123;
 	}
 
 }
