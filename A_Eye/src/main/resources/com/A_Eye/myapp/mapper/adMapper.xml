@@ -42,6 +42,12 @@
 		WHERE
 		USER_IDX=#{user_idx}
 	</select> -->
+	
+	  <select id="Addata" parameterType="com.A_Eye.myapp.model.userVO" resultType="com.A_Eye.myapp.model.adVO">
+      SELECT *
+      FROM TBL_AD
+      WHERE USER_IDX = #{user_idx}
+   </select>
 
 
 </mapper>
