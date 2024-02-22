@@ -87,6 +87,13 @@ public class adConroller {
 	            e.printStackTrace();
 	        }
 	    }
+	    
+	    @PostMapping("/api/Addata")
+	    public List<adVO> Addata(@RequestBody userVO vo) {
+	       List<adVO> result = mapper.Addata(vo);
+	       
+	        return result;
+	    }
 	
 	
 }
