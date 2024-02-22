@@ -33,6 +33,7 @@
 		FROM TBL_AD a
 		LEFT JOIN TBL_PAY p ON a.AD_IDX = p.AD_IDX
 		WHERE a.USER_IDX=#{user_idx}
+		AND a.AD_APPROVAL = 'Y'
 	</select>
 	
 
