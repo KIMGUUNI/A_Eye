@@ -1,16 +1,23 @@
 package com.A_Eye.myapp.scheduledTasks;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import com.A_Eye.myapp.mapper.refreshMapper;
+import com.A_Eye.myapp.model.refreshTkVO;
 
 @Component
 public class ScheduledTasks {
 
-    // 1시간마다 실행되도록 스케줄링합니다.
-    //@Scheduled(fixedRate = 3600000) // 밀리초 단위 (1시간 = 3600000 밀리초)
-    @Scheduled(fixedRate = 60000)
-    public void performTask() {
-        // 실행할 작업을 여기에 작성합니다.
-        System.out.println("주기적인 작업을 수행합니다.");
-    }
+	@Autowired
+	private refreshMapper reMapper;
+
+	@Scheduled(fixedRate = 604800000)
+	public void performTask() {
+		reMapper.deleteExpiredTokens();
+		
+	}
 }

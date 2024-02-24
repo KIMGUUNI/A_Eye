@@ -20,9 +20,17 @@
 	</delete>
 	<update id="reCreateRefreshToken">
 		UPDATE TBL_JWT
-		SET JWT_REFRESH = #{newRefreshToken}, EXPIRATION = SYSTIMESTAMP+INTERVAL
+		SET JWT_REFRESH = #{newRefreshToken},
+		EXPIRATION = SYSTIMESTAMP+INTERVAL
 		'5' MINUTE
-		WHERE USER_IDX = #{userIdx}
+		WHERE USER_IDX =
+		#{userIdx}
 	</update>
-	
+	<delete id="deleteExpiredTokens">
+  <![CDATA[
+    DELETE FROM TBL_JWT
+    WHERE EXPIRATION  < SYSDATE
+  ]]>
+	</delete>
+
 </mapper>

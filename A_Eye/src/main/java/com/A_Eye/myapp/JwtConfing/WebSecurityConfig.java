@@ -31,12 +31,35 @@ public class WebSecurityConfig {
 
 	    return http.build();
 	}
+	
 
-
-	@Bean
-	PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-		
-	}
+	  @Bean PasswordEncoder passwordEncoder() { 
+		  
+		  return new BCryptPasswordEncoder();
+	 
+	 }
+	  
+	/*
+	 * @Bean public SecurityFilterChain securityFilterChain(HttpSecurity http)
+	 * throws Exception {
+	 * http.cors(AbstractHttpConfigurer::disable).httpBasic((basic) ->
+	 * basic.disable()).csrf(csrf -> csrf.disable()) .authorizeRequests(authorize ->
+	 * authorize .antMatchers("/images/**", "/api/boardList", "/api/sign-in",
+	 * "/api/register", "/api/prove", "/swagger-ui.html", "/api/profile",
+	 * "/api/boardList", "/api/boardGet", "/api/boardAnswer", "/api/application",
+	 * "/api/getMonthAds", "/api/getChartAd", "/api/getBarChartAd",
+	 * "/api/getUserAds", "/api/reProve", "/api/Refuse", "/api/Approval",
+	 * "/api/GetVideoUrl", "/api/SelectVd","/api/Advertising","/api/s3Url",
+	 * "/api/adList", "/api/payResult","/api/deletePost", "/api/Addata")
+	 * .permitAll().antMatchers("/billing/**").hasRole("1").anyRequest().
+	 * authenticated()) .formLogin(login -> login.disable());
+	 * 
+	 * return http.build(); }
+	 * 
+	 * 
+	 * @Bean PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder();
+	 * 
+	 * }
+	 */
 
 }
