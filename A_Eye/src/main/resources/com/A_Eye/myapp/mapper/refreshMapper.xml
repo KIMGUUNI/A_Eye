@@ -16,13 +16,13 @@
 	</select>
 	<delete id="delRefreshJwt"
 		parameterType="com.A_Eye.myapp.model.refreshTkVO">
-		DELETE FROM TBL_JWT WHERE jwt_refresh = #{refreshToken}
+		DELETE FROM TBL_JWT WHERE user_idx = #{userIdx}
 	</delete>
 	<update id="reCreateRefreshToken">
 		UPDATE TBL_JWT
 		SET JWT_REFRESH = #{newRefreshToken}, EXPIRATION = SYSTIMESTAMP+INTERVAL
 		'5' MINUTE
-		WHERE USER_IDX = #{user_idx}
+		WHERE USER_IDX = #{userIdx}
 	</update>
 	
 </mapper>

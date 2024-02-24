@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -15,18 +16,22 @@ public class WebSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.cors(AbstractHttpConfigurer::disable).httpBasic((basic) -> basic.disable()).csrf(csrf -> csrf.disable())
-				.authorizeRequests(authorize -> authorize
-						.antMatchers("/images/**", "/api/boardList", "/api/sign-in", "/api/register", "/api/prove",
-								"/swagger-ui.html", "/api/profile", "/api/boardList", "/api/boardGet",
-								"/api/boardAnswer", "/api/application", "/api/getMonthAds", "/api/getChartAd",
-								"/api/getBarChartAd", "/api/getUserAds", "/api/reProve", "/api/Refuse", "/api/Approval",
-								"/api/GetVideoUrl", "/api/SelectVd","/api/Advertising","/api/s3Url", "/api/adList", "/api/payResult","/api/deletePost", "/api/Addata")
-						.permitAll().antMatchers("/billing/**").hasRole("1").anyRequest().authenticated())
-				.formLogin(login -> login.disable()); 
+	    http
+	        .cors(AbstractHttpConfigurer::disable)
+	        .httpBasic((basic) -> basic.disable())
+	        .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())) // CSRF 방어 활성화
+	        .authorizeRequests(authorize -> authorize
+	            .antMatchers("/images/**", "/api/boardList", "/api/sign-in", "/api/register", "/api/prove",
+	                "/swagger-ui.html", "/api/profile", "/api/boardList", "/api/boardGet",
+	                "/api/boardAnswer", "/api/application", "/api/getMonthAds", "/api/getChartAd",
+	                "/api/getBarChartAd", "/api/getUserAds", "/api/reProve", "/api/Refuse", "/api/Approval",
+	                "/api/GetVideoUrl", "/api/SelectVd","/api/Advertising","/api/s3Url", "/api/adList", "/api/payResult","/api/deletePost", "/api/Addata")
+	                .permitAll().antMatchers("/billing/**").hasRole("1").anyRequest().authenticated())
+	        .formLogin(login -> login.disable()); 
 
-		return http.build();
+	    return http.build();
 	}
+
 
 	@Bean
 	PasswordEncoder passwordEncoder() {
