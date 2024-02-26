@@ -7,7 +7,7 @@
 	<insert id="refreshJwt"
 		parameterType="com.A_Eye.myapp.model.refreshTkVO">
 		INSERT INTO TBL_JWT (USER_IDX,JWT_REFRESH,EXPIRATION)
-		VALUES(#{user_idx},#{jwt_refresh}, SYSTIMESTAMP+INTERVAL '5' MINUTE)
+		VALUES(#{user_idx},#{jwt_refresh}, SYSTIMESTAMP+INTERVAL '7' DAY)
 	</insert>
 	<select id="proveRefresh"
 		parameterType="com.A_Eye.myapp.model.refreshTkVO"
@@ -21,8 +21,7 @@
 	<update id="reCreateRefreshToken">
 		UPDATE TBL_JWT
 		SET JWT_REFRESH = #{newRefreshToken},
-		EXPIRATION = SYSTIMESTAMP+INTERVAL
-		'5' MINUTE
+		EXPIRATION = SYSTIMESTAMP+INTERVAL '7' DAY
 		WHERE USER_IDX =
 		#{userIdx}
 	</update>
