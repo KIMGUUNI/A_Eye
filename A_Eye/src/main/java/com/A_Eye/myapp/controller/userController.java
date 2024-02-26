@@ -66,7 +66,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 @Transactional
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 public class userController {
 	@Autowired
 	private userMapper mapper;

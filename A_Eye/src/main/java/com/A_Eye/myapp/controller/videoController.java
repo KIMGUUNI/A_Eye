@@ -12,6 +12,7 @@ import com.A_Eye.myapp.mapper.videoMapper;
 import com.A_Eye.myapp.model.adVO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 @RestController
+@Transactional
 public class videoController {
 
 	@Autowired

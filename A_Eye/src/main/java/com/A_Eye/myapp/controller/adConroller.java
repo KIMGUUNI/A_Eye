@@ -18,7 +18,6 @@ import com.A_Eye.myapp.model.userVO;
 
 @Transactional
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 public class adConroller {
 
 	@Autowired

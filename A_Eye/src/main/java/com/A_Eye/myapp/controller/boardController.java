@@ -20,7 +20,6 @@ import com.A_Eye.myapp.model.boardVO;
 
 @Transactional
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 //@Tag(name = "예제 API", description = "Swagger 테스트용 API")
 public class boardController {
 
