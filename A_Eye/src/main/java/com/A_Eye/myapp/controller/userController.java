@@ -97,11 +97,8 @@ public class userController {
 	@PostMapping("/api/sign-in")
 	public ResponseEntity<AuthResponse> login(@RequestBody userVO vo) {
 		refreshTkVO refreshvo = new refreshTkVO();
-		sigingKey = jwtProp.getSecretKey().getBytes();
 		String roles;
 		userVO loginVO = mapper.login(vo);
-		if (passwordEncoder.matches(vo.getUser_pw(), loginVO.getUser_pw())) {
-		}
 		if (loginVO != null && passwordEncoder.matches(vo.getUser_pw(), loginVO.getUser_pw())) {
 			if (loginVO.getUser_email().equals("admin")) {
 				// roles.add("1");
@@ -112,6 +109,9 @@ public class userController {
 
 			String accessJwt = jwtUtil.generateToken(loginVO.getUser_email(), roles);
 			String refreshJwt = jwtUtil.createRefreshToken();
+			
+			System.out.println(accessJwt);
+			System.out.println(refreshJwt);
 			
 			refreshvo.setUser_idx(loginVO.getUser_idx());
 			refreshvo.setJwt_refresh(refreshJwt);
@@ -146,8 +146,9 @@ public class userController {
 	@GetMapping("/api/reProve")
 	public ResponseEntity<?> refreshToken(@RequestHeader(name = "Authorization") String header,
 	                                       @RequestParam(name = "user_name") String user_name,
-	                                       @RequestParam(name = "user_position") String userPosition) {
-	    return jwtUtil.refreshToken(header, user_name, userPosition);
+	                                       @RequestParam(name = "user_position") String userPosition,
+	                                       @RequestParam(name = "user_idx") String user_idx) {
+	    return jwtUtil.refreshToken(header, user_name, userPosition, user_idx);
 	}
 	
 }
